@@ -1,0 +1,20 @@
+## Summary
+
+Adds a new documentation file (`docs/gemini-cli-file-scoping.md`) that explains how to control file and workspace scope in the **Gemini CLI** — specifically addressing the `Unknown arguments: all-files, allFiles` error and showing the correct alternatives (`--include-directories`, `@path` syntax, and `settings.json`).
+
+## Context
+
+This project integrates with Gemini via the **LLM API** (through `ChatGoogleGenerativeAI` in `agentbuilder/llm/gemini_llm.py`), which is distinct from the **Gemini CLI** (Google's interactive terminal tool). This guide helps contributors who use the Gemini CLI while working on the Agent Builder API project understand the difference and use the CLI correctly.
+
+## Changes
+
+- **Renamed** placeholder file `Untitled-1.md` → `docs/gemini-cli-file-scoping.md` (added a `docs/` directory for better organization)
+- **Added** an intro note clarifying the Gemini CLI vs. Gemini LLM API distinction, with links to `agentbuilder/llm/gemini_llm.py` and the README
+- **Added** Agent Builder API-specific examples for each scoping method
+- **Added** a "Related project configuration" table linking to the project's Gemini LLM API settings
+- **Added** internal anchor links to relevant README sections
+
+## Related
+
+- Project Gemini LLM integration: `agentbuilder/llm/gemini_llm.py`
+- README model configuration: see "Configuring models" section
