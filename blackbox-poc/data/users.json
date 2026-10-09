@@ -1,0 +1,15 @@
+[
+  {
+    "user_id": "oscar_broome",
+    "name": "Oscar Broome",
+    "role": "owner",
+    "api_key": "d8CUyFKmE5n5Crb6OfdVcwB7G7YzQpfIcU6zdaUjFi0",
+    "password_hash": "scrypt$bQETY1_fUK-JxgPz34fQjg==$KmHynNwRgwoiT7PSR6hLyjYdhbhd7Cq9qiTUuMs4rC0=",
+    "created_at": "2026-08-31T18:47:58.591416",
+    "last_access": "2026-08-31T18:47:58.591416",
+    "_rate_limit_info": {
+      "count": 0,
+      "reset": "2026-08-31T19:47:58.591416"
+    }
+  }
+]

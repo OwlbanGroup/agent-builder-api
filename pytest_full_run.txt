@@ -1,0 +1,436 @@
+.............................................sssssssss.................. [  2%]
+s............sssssss.................................................... [  4%]
+........................................................................ [  6%]
+........................................................................ [  8%]
+................................ssssssss................................ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 15%]
+........................................................................ [ 17%]
+........................................................................ [ 20%]
+....................................................sssss............... [ 22%]
+........................................................................ [ 24%]
+........................................................................ [ 26%]
+........................................................................ [ 28%]
+........................................................................ [ 31%]
+.....sssssssss.......................................................... [ 33%]
+......................................................................ss [ 35%]
+s.....................................sss............................... [ 37%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+.................ssss............................................ssssss. [ 48%]
+........................................................................ [ 51%]
+........................................................................ [ 53%]
+........................................................................ [ 55%]
+........................................................................ [ 57%]
+........................................................................ [ 60%]
+........................................................................ [ 62%]
+........................................................................ [ 64%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+........................................................................ [ 71%]
+........................................................................ [ 73%]
+........................................................................ [ 75%]
+........................................................................ [ 77%]
+........................................................................ [ 80%]
+........................................................................ [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 86%]
+..................................................................ss.... [ 88%]
+.......................................................................F [ 91%]
+FF.FFFF................................................................. [ 93%]
+........................................................................ [ 95%]
+........................................................................ [ 97%]
+.......................................................................  [100%]
+================================== FAILURES ===================================
+___________________ test_create_payment_integration_success ___________________
+src\api\test_cashapp_integration.py:86: in test_create_payment_integration_success
+    assert transaction is not None
+E   assert None is not None
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:34,082 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,082 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:34,130 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,131 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:34,131 INFO sqlalchemy.engine.Engine [generated in 0.00019s] ('integ-order-456',)
+2026-10-06 15:55:34,133 INFO sqlalchemy.engine.Engine INSERT INTO cashapp_transactions (reference_id, amount_cents, currency, status, cash_app_payment_id) VALUES (?, ?, ?, ?, ?) RETURNING id, created_at, updated_at
+2026-10-06 15:55:34,133 INFO sqlalchemy.engine.Engine [generated in 0.00015s] ('integ-order-456', 1500, 'USD', 'pending', None)
+2026-10-06 15:55:34,136 INFO sqlalchemy.engine.Engine INSERT INTO cashapp_request_intents (reference_id, client_id, endpoint, idempotency_key, payload, payload_digest, status, request_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING created_at
+2026-10-06 15:55:34,136 INFO sqlalchemy.engine.Engine [generated in 0.00050s] ('integ-order-456', 'test_client_id', 'https://api.cash.app/customer-request/v1/requests', '8c1a4789-f3c5-57cb-86ac-972d8eb4f032', '{"idempotency_key": "8c1a4789-f3c5-57cb-86ac-972d8eb4f032", "request": {"actions": [{"type": "ONE_TIME_PAYMENT", "scope_id": "test_client_id", "amoun ... (8 characters truncated) ... , "currency": "USD"}], "channel": "ONLINE", "redirect_url": "http://testserver/api/v1/payments/cashapp/redirect", "reference_id": "integ-order-456"}}', '304821e1f8c00f2e65222338b834f3c783e1c10d66c69ae4c061e2cbca17de1e', 'RESERVED', None)
+2026-10-06 15:55:34,137 INFO sqlalchemy.engine.Engine COMMIT
+2026-10-06 15:55:34,147 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,147 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:34,147 INFO sqlalchemy.engine.Engine [cached since 0.01644s ago] ('integ-order-456',)
+2026-10-06 15:55:34,150 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:34,150 INFO sqlalchemy.engine.Engine [generated in 0.00051s] ('integ-order-456',)
+2026-10-06 15:55:34,151 INFO sqlalchemy.engine.Engine COMMIT
+2026-10-06 15:55:34,161 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,161 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:34,161 INFO sqlalchemy.engine.Engine [generated in 0.00016s] ('integ-order-456',)
+2026-10-06 15:55:34,164 INFO sqlalchemy.engine.Engine UPDATE cashapp_request_intents SET status=?, request_id=? WHERE cashapp_request_intents.reference_id = ? AND (cashapp_request_intents.request_id IS NULL OR cashapp_request_intents.request_id = ?)
+2026-10-06 15:55:34,164 INFO sqlalchemy.engine.Engine [generated in 0.00026s] ('BOUND', 'cpi_123', 'integ-order-456', 'cpi_123')
+2026-10-06 15:55:34,166 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:34,166 INFO sqlalchemy.engine.Engine [cached since 0.005222s ago] ('integ-order-456',)
+2026-10-06 15:55:34,168 INFO sqlalchemy.engine.Engine UPDATE cashapp_transactions SET status=?, cash_app_payment_id=?, updated_at=CURRENT_TIMESTAMP WHERE cashapp_transactions.reference_id = ? AND cashapp_transactions.amount_cents = ? AND cashapp_transactions.currency = ? AND cashapp_transactions.status IN (?, ?)
+2026-10-06 15:55:34,168 INFO sqlalchemy.engine.Engine [generated in 0.00017s] ('pending', 'cpi_123', 'integ-order-456', 1500, 'USD', 'pending', 'failed')
+2026-10-06 15:55:34,168 INFO sqlalchemy.engine.Engine COMMIT
+2026-10-06 15:55:34,176 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,177 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:34,177 INFO sqlalchemy.engine.Engine [cached since 0.02693s ago] ('integ-order-456',)
+2026-10-06 15:55:34,180 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.id = ?
+2026-10-06 15:55:34,180 INFO sqlalchemy.engine.Engine [generated in 0.00054s] (1,)
+2026-10-06 15:55:34,184 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00019s] ('integ-order-456',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 INSERT INTO cashapp_transactions (reference_id, amount_cents, currency, status, cash_app_payment_id) VALUES (?, ?, ?, ?, ?) RETURNING id, created_at, updated_at
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00015s] ('integ-order-456', 1500, 'USD', 'pending', None)
+INFO     sqlalchemy.engine.Engine:base.py:1899 INSERT INTO cashapp_request_intents (reference_id, client_id, endpoint, idempotency_key, payload, payload_digest, status, request_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING created_at
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00050s] ('integ-order-456', 'test_client_id', 'https://api.cash.app/customer-request/v1/requests', '8c1a4789-f3c5-57cb-86ac-972d8eb4f032', '{"idempotency_key": "8c1a4789-f3c5-57cb-86ac-972d8eb4f032", "request": {"actions": [{"type": "ONE_TIME_PAYMENT", "scope_id": "test_client_id", "amoun ... (8 characters truncated) ... , "currency": "USD"}], "channel": "ONLINE", "redirect_url": "http://testserver/api/v1/payments/cashapp/redirect", "reference_id": "integ-order-456"}}', '304821e1f8c00f2e65222338b834f3c783e1c10d66c69ae4c061e2cbca17de1e', 'RESERVED', None)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 0.01644s ago] ('integ-order-456',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00051s] ('integ-order-456',)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00016s] ('integ-order-456',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 UPDATE cashapp_request_intents SET status=?, request_id=? WHERE cashapp_request_intents.reference_id = ? AND (cashapp_request_intents.request_id IS NULL OR cashapp_request_intents.request_id = ?)
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00026s] ('BOUND', 'cpi_123', 'integ-order-456', 'cpi_123')
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 0.005222s ago] ('integ-order-456',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 UPDATE cashapp_transactions SET status=?, cash_app_payment_id=?, updated_at=CURRENT_TIMESTAMP WHERE cashapp_transactions.reference_id = ? AND cashapp_transactions.amount_cents = ? AND cashapp_transactions.currency = ? AND cashapp_transactions.status IN (?, ?)
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00017s] ('pending', 'cpi_123', 'integ-order-456', 1500, 'USD', 'pending', 'failed')
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 0.02693s ago] ('integ-order-456',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00054s] (1,)
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:34Z", "ip": "testclient", "method": "POST", "path": "/api/v1/payments/cashapp/create", "status": 200, "duration_ms": 62.0, "req_body": {"amount": 1500, "reference_id": "integ-order-456"}, "res_body": {"payment_request": {"request": {"id": "cpi_123", "auth_flow_redirect_url": "https://cash.app/approve/..."}}}}
+_______________ test_webhook_signature_verification_integration _______________
+src\api\test_cashapp_integration.py:136: in test_webhook_signature_verification_integration
+    assert updated_transaction.status == "successful"
+E   AssertionError: assert 'pending' == 'successful'
+E     
+E     - successful
+E     + pending
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:34,377 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,377 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:34,438 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,438 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:34,438 INFO sqlalchemy.engine.Engine [cached since 0.2881s ago] ('webhook-test-456',)
+2026-10-06 15:55:34,440 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 0.2881s ago] ('webhook-test-456',)
+WARNING  src.cashapp_service:cashapp_service.py:805 Transaction with reference_id webhook-test-456 not found for webhook event payment.successful.
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:34Z", "ip": "testclient", "method": "POST", "path": "/api/v1/payments/cashapp/webhook", "status": 200, "duration_ms": 0.0, "req_body": {"type": "payment.successful", "data": {"object": {"id": "cpi_xyz", "scope_id": "webhook-test-456"}}}, "res_body": {"status": "Webhook received and processed."}}
+_______________ test_get_transaction_status_integration_success _______________
+src\api\test_cashapp_integration.py:161: in test_get_transaction_status_integration_success
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:34,605 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,606 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:34,640 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:34,640 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:34,640 INFO sqlalchemy.engine.Engine [cached since 0.49s ago] ('integ-test-123',)
+2026-10-06 15:55:34,641 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 0.49s ago] ('integ-test-123',)
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:34Z", "ip": "testclient", "method": "GET", "path": "/api/v1/payments/cashapp/status/integ-test-123", "status": 404, "duration_ms": 0.0, "req_body": null, "res_body": {"detail": "Transaction with reference_id 'integ-test-123' not found."}}
+_____________________ test_list_transactions_integration ______________________
+src\api\test_cashapp_integration.py:216: in test_list_transactions_integration
+    assert len(data) == 3
+E   AssertionError: assert 1 == 3
+E    +  where 1 = len([{'reference_id': 'integ-order-456', 'cash_app_payment_id': 'cpi_123', 'status': 'pending', 'amount_cents': 1500, ...}])
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:35,043 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,043 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:35,084 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,085 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions ORDER BY cashapp_transactions.created_at DESC
+ LIMIT ? OFFSET ?
+2026-10-06 15:55:35,085 INFO sqlalchemy.engine.Engine [generated in 0.00017s] (100, 0)
+2026-10-06 15:55:35,088 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions ORDER BY cashapp_transactions.created_at DESC
+ LIMIT ? OFFSET ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00017s] (100, 0)
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:35Z", "ip": "testclient", "method": "GET", "path": "/api/v1/payments/cashapp/transactions", "status": 200, "duration_ms": 15.0, "req_body": null, "res_body": [{"reference_id": "integ-order-456", "cash_app_payment_id": "cpi_123", "status": "pending", "amount_cents": 1500, "currency": "USD", "created_at": "2026-10-06T22:55:34", "updated_at": "2026-10-06T22:55:34"}]}
+___________________ test_get_successful_volume_integration ____________________
+src\api\test_cashapp_integration.py:264: in test_get_successful_volume_integration
+    assert data["total_volume_cents"] == 8500  # 1000 + 2500 + 5000
+E   assert 0 == 8500
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:35,215 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,216 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:35,241 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,242 INFO sqlalchemy.engine.Engine SELECT sum(cashapp_transactions.amount_cents) AS total_volume, count(cashapp_transactions.id) AS transaction_count 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.status = ?
+2026-10-06 15:55:35,242 INFO sqlalchemy.engine.Engine [generated in 0.00018s] ('successful',)
+2026-10-06 15:55:35,243 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT sum(cashapp_transactions.amount_cents) AS total_volume, count(cashapp_transactions.id) AS transaction_count 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.status = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00018s] ('successful',)
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:35Z", "ip": "testclient", "method": "GET", "path": "/api/v1/payments/cashapp/volume", "status": 200, "duration_ms": 16.0, "req_body": null, "res_body": {"total_volume_cents": 0, "transaction_count": 0, "currency": "USD"}}
+___________________ test_webhook_failed_payment_integration ___________________
+src\api\test_cashapp_integration.py:307: in test_webhook_failed_payment_integration
+    assert pending_transaction.status == "failed"
+E   AssertionError: assert 'pending' == 'failed'
+E     
+E     - failed
+E     + pending
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:35,366 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,367 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:35,391 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,391 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:35,391 INFO sqlalchemy.engine.Engine [cached since 1.241s ago] ('failed-payment-789',)
+2026-10-06 15:55:35,393 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.241s ago] ('failed-payment-789',)
+WARNING  src.cashapp_service:cashapp_service.py:805 Transaction with reference_id failed-payment-789 not found for webhook event payment.failed.
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:35Z", "ip": "testclient", "method": "POST", "path": "/api/v1/payments/cashapp/webhook", "status": 200, "duration_ms": 0.0, "req_body": {"type": "payment.failed", "data": {"object": {"id": "cpi_failed_def", "scope_id": "failed-payment-789"}}}, "res_body": {"status": "Webhook received and processed."}}
+__________________ test_create_payment_integration_api_error __________________
+src\api\test_cashapp_integration.py:353: in test_create_payment_integration_api_error
+    assert transaction is not None
+E   assert None is not None
+---------------------------- Captured stdout setup ----------------------------
+2026-10-06 15:55:35,534 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,534 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+---------------------------- Captured stdout call -----------------------------
+2026-10-06 15:55:35,568 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,568 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:35,568 INFO sqlalchemy.engine.Engine [cached since 1.437s ago] ('integ-order-fail-789',)
+2026-10-06 15:55:35,570 INFO sqlalchemy.engine.Engine INSERT INTO cashapp_transactions (reference_id, amount_cents, currency, status, cash_app_payment_id) VALUES (?, ?, ?, ?, ?) RETURNING id, created_at, updated_at
+2026-10-06 15:55:35,570 INFO sqlalchemy.engine.Engine [cached since 1.437s ago] ('integ-order-fail-789', -100, 'USD', 'pending', None)
+2026-10-06 15:55:35,575 INFO sqlalchemy.engine.Engine INSERT INTO cashapp_request_intents (reference_id, client_id, endpoint, idempotency_key, payload, payload_digest, status, request_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING created_at
+2026-10-06 15:55:35,575 INFO sqlalchemy.engine.Engine [cached since 1.439s ago] ('integ-order-fail-789', 'test_client_id', 'https://api.cash.app/customer-request/v1/requests', '90bd3d77-9a5d-543f-ad69-dd752da6f417', '{"idempotency_key": "90bd3d77-9a5d-543f-ad69-dd752da6f417", "request": {"actions": [{"type": "ONE_TIME_PAYMENT", "scope_id": "test_client_id", "amoun ... (13 characters truncated) ... rrency": "USD"}], "channel": "ONLINE", "redirect_url": "http://testserver/api/v1/payments/cashapp/redirect", "reference_id": "integ-order-fail-789"}}', '012420d1545356e1bdbf9527f3f7c288e2fc4e68ea8c31005fd014fc2cf0c44d', 'RESERVED', None)
+2026-10-06 15:55:35,576 INFO sqlalchemy.engine.Engine COMMIT
+2026-10-06 15:55:35,585 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,585 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:35,585 INFO sqlalchemy.engine.Engine [cached since 1.454s ago] ('integ-order-fail-789',)
+2026-10-06 15:55:35,587 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:35,587 INFO sqlalchemy.engine.Engine [cached since 1.437s ago] ('integ-order-fail-789',)
+2026-10-06 15:55:35,589 INFO sqlalchemy.engine.Engine COMMIT
+2026-10-06 15:55:35,598 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,598 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:35,598 INFO sqlalchemy.engine.Engine [cached since 1.436s ago] ('integ-order-fail-789',)
+2026-10-06 15:55:35,600 INFO sqlalchemy.engine.Engine UPDATE cashapp_request_intents SET status=cashapp_request_intents.status WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:35,600 INFO sqlalchemy.engine.Engine [generated in 0.00019s] ('integ-order-fail-789',)
+2026-10-06 15:55:35,601 INFO sqlalchemy.engine.Engine SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+2026-10-06 15:55:35,602 INFO sqlalchemy.engine.Engine [cached since 1.44s ago] ('integ-order-fail-789',)
+2026-10-06 15:55:35,603 INFO sqlalchemy.engine.Engine UPDATE cashapp_transactions SET status=?, updated_at=CURRENT_TIMESTAMP WHERE cashapp_transactions.reference_id = ? AND cashapp_transactions.amount_cents = ? AND cashapp_transactions.currency = ? AND cashapp_transactions.status IN (?, ?)
+2026-10-06 15:55:35,604 INFO sqlalchemy.engine.Engine [generated in 0.00026s] ('failed', 'integ-order-fail-789', -100, 'USD', 'pending', 'failed')
+2026-10-06 15:55:35,608 INFO sqlalchemy.engine.Engine COMMIT
+2026-10-06 15:55:35,619 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-06 15:55:35,620 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+2026-10-06 15:55:35,620 INFO sqlalchemy.engine.Engine [cached since 1.469s ago] ('integ-order-fail-789',)
+2026-10-06 15:55:35,621 INFO sqlalchemy.engine.Engine SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.id = ?
+2026-10-06 15:55:35,622 INFO sqlalchemy.engine.Engine [cached since 1.441s ago] (2,)
+2026-10-06 15:55:35,624 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.437s ago] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 INSERT INTO cashapp_transactions (reference_id, amount_cents, currency, status, cash_app_payment_id) VALUES (?, ?, ?, ?, ?) RETURNING id, created_at, updated_at
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.437s ago] ('integ-order-fail-789', -100, 'USD', 'pending', None)
+INFO     sqlalchemy.engine.Engine:base.py:1899 INSERT INTO cashapp_request_intents (reference_id, client_id, endpoint, idempotency_key, payload, payload_digest, status, request_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING created_at
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.439s ago] ('integ-order-fail-789', 'test_client_id', 'https://api.cash.app/customer-request/v1/requests', '90bd3d77-9a5d-543f-ad69-dd752da6f417', '{"idempotency_key": "90bd3d77-9a5d-543f-ad69-dd752da6f417", "request": {"actions": [{"type": "ONE_TIME_PAYMENT", "scope_id": "test_client_id", "amoun ... (13 characters truncated) ... rrency": "USD"}], "channel": "ONLINE", "redirect_url": "http://testserver/api/v1/payments/cashapp/redirect", "reference_id": "integ-order-fail-789"}}', '012420d1545356e1bdbf9527f3f7c288e2fc4e68ea8c31005fd014fc2cf0c44d', 'RESERVED', None)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id, cashapp_request_intents.client_id, cashapp_request_intents.endpoint, cashapp_request_intents.idempotency_key, cashapp_request_intents.payload, cashapp_request_intents.payload_digest, cashapp_request_intents.status, cashapp_request_intents.request_id, cashapp_request_intents.created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.454s ago] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.437s ago] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+ERROR    src.cashapp_service:cashapp_service.py:145 Cash App API error for integ-order-fail-789: 400 - Bad Request
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.436s ago] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 UPDATE cashapp_request_intents SET status=cashapp_request_intents.status WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00019s] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_request_intents.reference_id AS cashapp_request_intents_reference_id, cashapp_request_intents.client_id AS cashapp_request_intents_client_id, cashapp_request_intents.endpoint AS cashapp_request_intents_endpoint, cashapp_request_intents.idempotency_key AS cashapp_request_intents_idempotency_key, cashapp_request_intents.payload AS cashapp_request_intents_payload, cashapp_request_intents.payload_digest AS cashapp_request_intents_payload_digest, cashapp_request_intents.status AS cashapp_request_intents_status, cashapp_request_intents.request_id AS cashapp_request_intents_request_id, cashapp_request_intents.created_at AS cashapp_request_intents_created_at 
+FROM cashapp_request_intents 
+WHERE cashapp_request_intents.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.44s ago] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 UPDATE cashapp_transactions SET status=?, updated_at=CURRENT_TIMESTAMP WHERE cashapp_transactions.reference_id = ? AND cashapp_transactions.amount_cents = ? AND cashapp_transactions.currency = ? AND cashapp_transactions.status IN (?, ?)
+INFO     sqlalchemy.engine.Engine:base.py:1904 [generated in 0.00026s] ('failed', 'integ-order-fail-789', -100, 'USD', 'pending', 'failed')
+INFO     sqlalchemy.engine.Engine:base.py:1142 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:1099 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.reference_id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.469s ago] ('integ-order-fail-789',)
+INFO     sqlalchemy.engine.Engine:base.py:1899 SELECT cashapp_transactions.id, cashapp_transactions.reference_id, cashapp_transactions.amount_cents, cashapp_transactions.currency, cashapp_transactions.status, cashapp_transactions.cash_app_payment_id, cashapp_transactions.created_at, cashapp_transactions.updated_at 
+FROM cashapp_transactions 
+WHERE cashapp_transactions.id = ?
+INFO     sqlalchemy.engine.Engine:base.py:1904 [cached since 1.441s ago] (2,)
+ERROR    src.api.cashapp_router:cashapp_router.py:101 Failed to create Cash App payment for reference_id integ-order-fail-789: Error from Cash App API: 400 - Bad Request
+INFO     sqlalchemy.engine.Engine:base.py:1125 ROLLBACK
+INFO     audit:audit.py:110 {"ts": "2026-10-06T22:55:35Z", "ip": "testclient", "method": "POST", "path": "/api/v1/payments/cashapp/create", "status": 400, "duration_ms": 63.0, "req_body": {"amount": -100, "reference_id": "integ-order-fail-789"}, "res_body": {"detail": "Invalid request to Cash App: Bad Request"}}
+============================== warnings summary ===============================
+src/test_time_travel_ai.py::TestDetectCyclicalPatterns::test_cyclical_short_data
+  c:\Users\bsean\.blackbox\blackbox-ai-repo\src\time_travel_ai.py:163: RuntimeWarning: invalid value encountered in divide
+    autocorr = autocorr[autocorr.size // 2 :] / np.max(autocorr)
+
+src/test_time_travel_ai.py::TestDetectTemporalAnomalies::test_anomaly_error
+src/test_time_travel_ai.py::TestCounterfactualReasoning::test_counterfactual_error
+src/test_time_travel_ai.py::TestCounterfactualReasoning::test_analyze_impacts_no_predicted_impact
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\_core\fromnumeric.py:3860: RuntimeWarning: Mean of empty slice.
+    return _methods._mean(a, axis=axis, dtype=dtype,
+
+src/test_time_travel_ai.py::TestDetectTemporalAnomalies::test_anomaly_error
+src/test_time_travel_ai.py::TestCounterfactualReasoning::test_counterfactual_error
+src/test_time_travel_ai.py::TestCounterfactualReasoning::test_analyze_impacts_no_predicted_impact
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\_core\_methods.py:145: RuntimeWarning: invalid value encountered in scalar divide
+    ret = ret.dtype.type(ret / rcount)
+
+src/test_time_travel_ai.py::TestDetectTemporalAnomalies::test_anomaly_error
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\_core\_methods.py:223: RuntimeWarning: Degrees of freedom <= 0 for slice
+    ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+
+src/test_time_travel_ai.py::TestDetectTemporalAnomalies::test_anomaly_error
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\_core\_methods.py:181: RuntimeWarning: invalid value encountered in divide
+    arrmean = um.true_divide(arrmean, div, out=arrmean,
+
+src/test_time_travel_ai.py::TestDetectTemporalAnomalies::test_anomaly_error
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\_core\_methods.py:215: RuntimeWarning: invalid value encountered in scalar divide
+    ret = ret.dtype.type(ret / rcount)
+
+src/test_unified_system.py::TestStart::test_start_exception_returns_error
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\inspect.py:3090: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    parameters_ex = (param,)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+src/api/test_healthcare_router.py::TestHealthcareRouter::test_qsvm_genomic_classification_mismatch
+  C:\Users\bsean\AppData\Local\Programs\Python\Python310\lib\site-packages\fastapi\routing.py:314: DeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    return await dependant.call(**values)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED src/api/test_cashapp_integration.py::test_create_payment_integration_success
+FAILED src/api/test_cashapp_integration.py::test_webhook_signature_verification_integration
+FAILED src/api/test_cashapp_integration.py::test_get_transaction_status_integration_success
+FAILED src/api/test_cashapp_integration.py::test_list_transactions_integration
+FAILED src/api/test_cashapp_integration.py::test_get_successful_volume_integration
+FAILED src/api/test_cashapp_integration.py::test_webhook_failed_payment_integration
+FAILED src/api/test_cashapp_integration.py::test_create_payment_integration_api_error
+7 failed, 3175 passed, 58 skipped, 12 warnings in 187.61s (0:03:07)
+
+===== STDERR =====
